@@ -46,6 +46,8 @@ const port = 3000;
 // Plantilla
 app.set('view engine', 'ejs');
 
+app.set('views',__dirname+'/views')
+
 
 
 app.use(express.static(__dirname+"/public"))
@@ -53,17 +55,19 @@ app.use(express.static(__dirname+"/public"))
 
 app.get('/', (req,res) => {
   //  console.log(__dirname)
-    res.send("Mi respuesta desde Express V.2");
+    res.render("index",{titulo: "mi titulo dinámico"});
 })
 
 app.get('/servicios', (req,res) => {
 
-    res.send("Estás en la Página de Servicios");
+    res.render("servicios",{titulo: "Servicios"});
 })
 
 app.use((req,res,next) => {
 
-    res.status(404).sendFile(__dirname+"/public/404.html")
+    res.status(404).render("404",{titulo: "Error 404",
+descripcion: "No existe esa ruta de página"
+});
 })
  
 app.listen(port, () =>{
