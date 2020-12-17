@@ -1,0 +1,47 @@
+<%- include("template/cabecera", {tituloWeb: 'Mostrar Mascotas'}) %>
+
+ <div class="box"> 
+
+    <a href="/mascotas/crear" class="button is-success mb-4">Crear Mascota</a>
+ 
+<% if (arrayMascotas.length > 0) { %>
+
+    <table class="table is-bordered is-size-5 has-text-grey has-text-centered">
+        <thead >
+         <tr class="has-background-info">
+         <td class="has-text-white">ID</td>
+         <td class="has-text-white">Nombre</td>
+         <td class="has-text-white">Descripción</td>
+         <td class="has-text-white">Acción</td>
+         </tr>
+     </thead>
+     <tbody>
+ <% arrayMascotas.forEach(mascota => { %>
+     
+    <tr >
+        <td><%= mascota.id  %> </td>
+        <td><%= mascota.nombre  %></td>
+        <td><%= mascota.descripcion %></td>
+        <td>
+            <a class="button is-info " href="/mascotas/<%= mascota.id %> ">Detalles</a>
+            <a class="button is-warning has-text-grey" href="#">Actualizar</a>
+           <!--Com-->
+        </td>
+        </tr>
+
+
+
+
+    <% }) %>
+
+<% } %>
+
+</tbody>
+</table>
+
+ </div>
+
+
+
+<%- include("template/footer") %>
+
