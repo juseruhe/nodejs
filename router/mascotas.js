@@ -2,7 +2,8 @@ const express = require('express')
 
 const router= express.Router();
 
-const Mascota = require('../models/mascota')
+const Mascota = require('../models/mascota');
+const { route } = require('./rutasweb');
 
 router.get('/',async (req,res) => {
 
@@ -52,7 +53,32 @@ router.post('/',async(req,res) =>{
 
 })
 
+router.get('/:id', async(req,res) => {
 
+   const id = req.params.id;
+
+  try {
+
+        const mascotaDB = await Mascota.findOne({_id: id})
+
+       console.log(mascotaDB)
+
+       res.render("detalles", {
+
+        mascota:mascotaDB,
+        error:false
+       })
+
+        
+    } catch (error) {
+        console.log(error)
+        res.render("detalles", {
+            error:true,
+            mensaje: "El ID de la Mascota Seleccionado no existe"
+           })
+    }
+
+})
 
 
 

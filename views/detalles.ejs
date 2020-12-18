@@ -1,0 +1,42 @@
+<%- include("template/cabecera",{tituloWeb: 'Detalles de la Mascota'}) %>
+
+<div class="box ">
+
+    <h1 class="title has-text-centered mt-4 is-size-2"> Detalles de la Mascota</h1>
+     <% if (error) { %>
+    
+        <p class="subtitle is-size-4 has-text-centered mt-4"> <%= mensaje %> </p>
+
+        <a class="button has-background-grey input has-text-white mt-4 " href="/mascotas"> << Volver a Mascotas</a>
+        
+     <% } %>
+
+
+     <% if (!error) { %>
+
+        <table class="table is-bordered mt-4 has-text-centered has-text-grey is-size-5">
+            <tr class="has-background-info has-text-white">
+         <td>ID</td>
+         <td>Nombre</td>
+         <td>Descripción</td>
+            </tr>
+            <tr>
+           <td><%= mascota.id %> </td>
+          <td><%= mascota.nombre  %></td>
+          <td><%= mascota.descripcion  %></td>
+           </tr>
+        </table>
+
+        <a class="button has-background-grey input has-text-white" href="../mascotas"> << Volver a Mascotas</a>
+      
+     <% } %>
+
+
+
+
+    
+    
+
+</div>
+    
+<%- include("template/footer") %>
