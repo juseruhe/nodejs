@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { findByIdAndUpdate } = require('../models/mascota');
 
 const router= express.Router();
 
@@ -116,6 +117,36 @@ router.delete('/:id', async(req,res) => {
 
 })
 
+router.put('/:id',async(req,res) => {
+
+    const id = req.params.id
+
+    const body = req.body
+
+try {
+
+    const mascotaDB = await findByIdAndUpdate( id,body,  { useFindAndModify: false   })
+    console.log(mascotaDB)
+
+    res.json({
+
+        estado: true,
+        respuesta: "Actualizado !!"
+    })
+    
+} catch (error) {
+    console.log(error)
+    res.json({
+
+        estado: false,
+        respuesta: "No se pudó actualizar !!"
+    })
+
+
+}
+
+
+})
 
 
 module.exports = router

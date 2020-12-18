@@ -14,20 +14,22 @@
 
      <% if (!error) { %>
 
-        <table class="table is-bordered mt-4 has-text-centered has-text-grey is-size-5">
-            <tr class="has-background-info has-text-white">
-         <td>ID</td>
-         <td>Nombre</td>
-         <td>Descripción</td>
-         <td>Acción</td>
-            </tr>
-            <tr>
-           <td><%= mascota.id %> </td>
-          <td><%= mascota.nombre  %></td>
-          <td><%= mascota.descripcion  %></td>
-          <td><button id="btnEliminar" data-id="<%= mascota.id %>" class="button has-background-danger has-text-white">Eliminar</button></td>
-           </tr>
-        </table>
+      <form id="formularioEditar" data-id="<%= mascota.id %>" >
+
+        <h1 class="title has-text-centered is-size-2 mt-4"> Actualizar Mascota</h1>
+
+      <label class="is-size-4 subtitle label has-text-centered mt-4" for="nombre"> Nombre: </label>
+       <input class="input" type="text" name="nombre" value="<%= mascota.nombre  %> " id="nombre">
+
+       <label class="is-size-4 subtitle label has-text-centered mt-4" for="descripcion"> Descripción: </label>
+       <input class="input" type="text" name="descripcion" value="<%= mascota.descripcion %> " id="descripcion">
+
+      <button type="submit"  class="button has-background-warning input has-text-danger mb-4 mt-4">Actualizar Mascota</button>
+
+      </form>
+
+<button id="btnEliminar" data-id="<%= mascota.id %>" class="button has-background-danger has-text-white">Eliminar</button>
+          
 
         <a class="button has-background-grey input has-text-white" href="../mascotas"> << Volver a Mascotas</a>
       
@@ -77,6 +79,45 @@ try {
 } catch (error) {
     console.log(error)
 }
+
+})
+
+const formularioEditar = document.querySelector('#formularioEditar')
+
+formularioEditar.addEventListener("submit", async(e) => {
+
+    e.preventDefault()
+
+    const nombre = formularioEditar.elements['nombre'].value
+    const descripcion = formularioEditar.querySelector('#descripcion').value
+    const id = formularioEditar.dataset.id
+
+    try {
+
+        const data = await fetch(`/mascotas/${id}`,{
+
+            method: 'put',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                nombre,descripcion
+            })
+        })
+
+        const res =  await data.json()
+
+        console.log(res)
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+
+
 
 })
 
