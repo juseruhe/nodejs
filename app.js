@@ -43,6 +43,27 @@ const app = express();
 
 const port = process.env.PORT|| 3000; //Puerto
 
+//Conexión a base de datos
+
+const mongoose = require('mongoose');
+
+const user = "root";
+const password= "123";
+const dbname = "veterinaria";
+const uri = `mongodb+srv://${user}:${password}@cluster0.wzqfk.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+
+
+
+mongoose.connect(uri,
+ {useNewUrlParser: true, useUnifiedTopology: true})
+
+ .then(console.log("Base de Datos Conectado"))
+
+ .catch(e => console.log(e))
+
+
+
+
 // Plantilla
 app.set('view engine', 'ejs');
 
@@ -53,15 +74,12 @@ app.set('views',__dirname+'/views')
 app.use(express.static(__dirname+"/public"))
 
 
-app.get('/', (req,res) => {
-  //  console.log(__dirname)
-    res.render("index",{titulo: "mi titulo dinámico"});
-})
+// Llamamos Rutas
 
-app.get('/servicios', (req,res) => {
+app.use('/', require('./router/rutasweb'));
 
-    res.render("servicios",{titulo: "Servicios"});
-})
+app.use('/mascotas', require('./router/mascotas'));
+
 
 app.use((req,res,next) => {
 
