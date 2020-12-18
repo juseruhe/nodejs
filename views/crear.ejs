@@ -1,0 +1,17 @@
+<%- include("template/cabecera",{tituloWeb: 'Crear Mascota'}) %>
+
+<div class="box  is-size-2">
+    <h1 class="title is-size-2 has-text-centered ">Crear Mascota</h1>
+    <form action="/mascotas" method="post">
+
+     <label class="label subtitle is-size-4 has-text-centered" for="nombre" placeholder="Escriba el Nombre: "> Nombre</label>   
+   <input type="text" name="nombre" class="input">
+
+   <label class="label subtitle is-size-4 has-text-centered" for="nombre" placeholder="Escriba la Descripción: "> Descripción</label>   
+   <input type="text" name="descripcion" class="input" >
+
+   <button class="button is-success input">Crear Mascota</button>
+
+    </form>
+</div>  
+<%- include("template/footer") %>
